@@ -1,0 +1,31 @@
+﻿@page "/"
+
+@inject WizardingWorldService wizardingWorldService
+
+<H1>Hello Heartcore!</H1>
+
+@if (content != null)
+{
+      
+    <ul>
+        @foreach (var item in content)
+        {
+            <li>@item.Name</li>
+        }
+    </ul>
+}
+
+
+
+@code {
+
+    private IEnumerable<Content> content;
+
+    private string stringresult;
+
+    protected override async Task OnInitializedAsync()
+    {
+        content = await wizardingWorldService.GetWizardingWorldCharacters();
+        
+    }
+}

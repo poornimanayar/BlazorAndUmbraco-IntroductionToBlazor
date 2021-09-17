@@ -1,0 +1,26 @@
+﻿@page "/"
+
+@inject IProductService productService
+
+<H1>Here is a list of Umbazing products!</H1>
+
+@if (products != null)
+{
+    <ul>
+        @foreach (var product in products)
+        {
+            <li>@product.ProductName</li>
+        }
+    </ul>
+}
+
+
+@code {
+
+    private List<ProductResponseModel> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await productService.GetProducts();
+    }
+}
